@@ -41,7 +41,7 @@ def epgam(filename):
             epsilon += "1"
     
     return int(gamma, 2)*int(epsilon,2)
-print("epsiolGamma:",epgam("3.txt"))
+
 def ox(filename):
 
     bitFile = open(filename)
@@ -58,10 +58,7 @@ def ox(filename):
         stripedBitnumber = bitnumber.strip()
         bitList.append(stripedBitnumber)
   
-    bitDict = {}
-    bitDict["0"] = bitList
-    
-   
+  
     for i in range(len(stripedBitnumber)):
 
         if len(bitList) == 1:
@@ -114,10 +111,6 @@ def co2(filename):
         stripedBitnumber = bitnumber.strip()
         bitList.append(stripedBitnumber)
 
-    bitDict = {}
-    bitDict["0"] = bitList
-    
-   
     for i in range(len(stripedBitnumber)):
 
         if len(bitList) == 1:
@@ -155,5 +148,8 @@ def co2(filename):
         oneCounter = 0
         zeroCounter = 0
 
+def main():
+    print("epsiolGamma:",epgam("3.txt"))
+    print("oxCo2: ",int(ox("3.txt")[0], 2)*int(co2("3.txt")[0], 2))
 
-print("oxCo2: ",int(ox("3.txt")[0], 2)*int(co2("3.txt")[0], 2))
+main() 
