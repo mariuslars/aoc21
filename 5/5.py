@@ -53,7 +53,7 @@ class Ventmap():
             self._emptyMap.append(rowlist)
             rowlist = []
 
-    def populateHorDiagMap(self):
+    def populateHoriVertMap(self):
 
         usedLines = []
         for line in self._lines:
@@ -91,7 +91,7 @@ class Ventmap():
                 self._lines.remove(line)
         
     
-    def populateVertMap(self):
+    def populateDiagMap(self):
 
         for line in self._lines:
             
@@ -124,9 +124,9 @@ def main():
     map1 = Ventmap()
     map1.readLines("5.txt")
     map1.genEmptyMap()
-    map1.populateHorDiagMap()
+    map1.populateHoriVertMap()
     map1.getPoints()
-    map1.populateVertMap()
+    map1.populateDiagMap()
     map1.getPoints()
  
 
