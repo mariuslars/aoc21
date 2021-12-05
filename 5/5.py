@@ -67,8 +67,6 @@ class Ventmap():
             if standardCond or extraCond:
                 
                 continue
-
-            
             
             colNums = list(range(min(line[y1], line[y2]), max(line[y1], line[y2])+1))
             rowNums = list(range(min(line[x1], line[x2]), max(line[x1], line[x2])+1))
@@ -78,7 +76,6 @@ class Ventmap():
 
             if line[x1] > line[x2]:
                 rowNums = rowNums[::-1]
-
 
             for row in rowNums:
                 
@@ -95,8 +92,6 @@ class Ventmap():
                 
                 self._lines.remove(line)
         
-        
-
     
     def populateVertMap(self):
         x1 = 1
@@ -132,27 +127,6 @@ class Ventmap():
                     scoreCounter += 1
 
         print("score er: ", scoreCounter)
-
-        
-    def printMap(self):
-
-        newMap = []
-        newLine = []
-        for line in self._emptyMap:
-
-            for num in line:
-                
-                if num == 0:
-                    newLine.append(".")
-                else:
-                    newLine.append(str(num))
-            
-            
-            newMap.append(newLine)
-            newLine = []
-            
-        for line in newMap:
-            print(line)
 
 
 def main():
