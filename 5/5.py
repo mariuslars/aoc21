@@ -1,3 +1,8 @@
+x1 = 1
+x2 = 3
+y1 = 0
+y2 = 2
+
 class Ventmap():
 
     def __init__(self):
@@ -49,22 +54,15 @@ class Ventmap():
             rowlist = []
 
     def populateHorDiagMap(self):
-        x1 = 1
-        x2 = 3
-        y1 = 0
-        y2 = 2
+
         usedLines = []
         for line in self._lines:
 
             colLength = abs(line[x1] - line[x2])
             rowLength = abs(line[y1] - line[y2])
-            rowNums = []
-            colNums = []
             
-            standardCond = (colLength > 0) and (rowLength > 0)
-            extraCond = (colLength == 0) and (rowLength == 0)
 
-            if standardCond or extraCond:
+            if ((colLength > 0) and (rowLength > 0)) or ((colLength == 0) and (rowLength == 0)):
                 
                 continue
             
@@ -94,17 +92,9 @@ class Ventmap():
         
     
     def populateVertMap(self):
-        x1 = 1
-        x2 = 3
-        y1 = 0
-        y2 = 2
-        #")
+
         for line in self._lines:
             
-            rowNums = []
-            colNums = []
-
-
             colNums = list(range(min(line[y1], line[y2]), max(line[y1], line[y2])+1))
             rowNums = list(range(min(line[x1], line[x2]), max(line[x1], line[x2])+1))
 
@@ -134,12 +124,10 @@ def main():
     map1 = Ventmap()
     map1.readLines("5.txt")
     map1.genEmptyMap()
-
-
-
     map1.populateHorDiagMap()
     map1.getPoints()
     map1.populateVertMap()
     map1.getPoints()
+ 
 
 main()
