@@ -1,30 +1,26 @@
-
+library(dplyr)
 fishPopulation <- function(filename, generations){
   
-  initGens <- as.numeric(unlist(strsplit(readLines(filename), ",")))
-  
-  
-  dd <- data.frame(age = initGens) %>% 
+  populationCount <- as.numeric(unlist(strsplit(readLines(filename), ","))) %>% 
+    tibble(age = .) %>% 
     group_by(age) %>% 
     summarise(n = n())
-  
+
   for (i in 1:generations){
     
-    generateN <-  dd %>% filter(age == "0") %>% .$n
-    N <- ifelse(length(generateN) == 0, 0, generateN)
-    frame8 <- data.frame(age = 8, n = N)
-    frame6 <- data.frame(age = 6, n = N)
+    N <- populationCount[populationCount$age == 0, "n"][[1]]
     
-    dd <- dd %>% 
+    populationCount <- populationCount %>% 
       mutate(age = age-1) %>% 
-      rbind(frame8, frame6) %>% 
+      rbind(tibble(age = 8, n = N), 
+            tibble(age = 6, n = N)) %>% 
       filter(age >= 0 & n > 0) %>% 
       group_by(age) %>% 
       summarise(n = sum(n))
     
   }
   
-  return(sum(dd$n))
+  return(sum(populationCount$n))
 }
 
 main <- function(){
