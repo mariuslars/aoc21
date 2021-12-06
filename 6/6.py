@@ -21,4 +21,4 @@ def fishEstimator(filsti, numDays):
     
 
 print(fishEstimator("6_ex.txt", 80))
-#Works only for 80 gens. Way to slow for 256. Changed to R for this one..,.
+#Works only for 80 gens. Way too slow for 256. Changed to R for this one..,.
