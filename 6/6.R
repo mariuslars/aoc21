@@ -9,30 +9,21 @@ fishPopulation <- function(filename, generations){
     summarise(n = n())
   
   for (i in 1:generations){
-    #cat("\014", i)
-    generateN8 <- generateN6 <- dd %>% filter(age == "0") %>% .$n
     
-    if(any(dd$age == 0)){
-      frame8 <- data.frame(age = 8, n = generateN8)
-      frame6 <- data.frame(age = 6, n = generateN8)
-    } else {
-      frame8 <- data.frame(age = 8, n = 0)
-      frame6 <- data.frame(age = 6, n = 0)
-    }
-
+    generateN <-  dd %>% filter(age == "0") %>% .$n
+    N <- ifelse(length(generateN) == 0, 0, generateN)
+    frame8 <- data.frame(age = 8, n = N)
+    frame6 <- data.frame(age = 6, n = N)
     
     dd <- dd %>% 
       mutate(age = age-1) %>% 
-      rbind(frame8) %>% 
-      rbind(frame6) %>% 
+      rbind(frame8, frame6) %>% 
       filter(age >= 0 & n > 0) %>% 
       group_by(age) %>% 
-      summarise(n = sum(n)) %>% 
-      arrange(age)
-    
+      summarise(n = sum(n))
     
   }
-  cat("\n\n\n")
+  
   return(sum(dd$n))
 }
 
@@ -46,91 +37,3 @@ main <- function(){
     
 }
 main()
-# 
-# dd
-# sum(dd$n)
-# options(scipen = 99999)
-# 
-# sort(c(5,6,5,3,4,5,6,7,7,8))
-# sort(c(4,5,4,2,3,4,5,6,6,7))
-# 
-# 
-# initGens <- as.numeric(unlist(strsplit(readLines("6.txt"), ",")))
-# newGen = function(x) {
-#   if (x == 0){
-#     x <- 6
-#   } else {
-#     x <- x -1
-#   }
-# }
-# 
-# 
-# 
-# fishEst <- function(initGen, numDays){
-#   
-#   notNew <- sum(initGen == 7)
-#   initGen = sapply(initGen, FUN = newGen)
-#   newFish <- 6 %in% initGen 
-#   numNew <- sum(initGen == 6)
-#   if (newFish){
-#     initGen <- c(initGen, rep(8, numNew-notNew))
-#   }
-#   
-#   day <<- day + 1
-#   #  cat(day)
-#   if (day == numDays){
-#     return (length(initGen))
-#   } else {
-#     return (fishEst(initGen, numDays = numDays))
-#   }
-#   
-# }
-# initGen <- c(1, 7, 7, 6, 6)
-# numDays <- 1
-# day <<- 0;fishEst(initGens, 150);day <<- 0;
-# 
-# sapply(initGens, FUN = newGen)
-# 
-# 
-# fishRec <- function(initGen, numDays){
-#   
-#   notNew <- sum(initGen == 7)
-#   
-#   
-# }
-# library(dplyr)
-# 
-# dd <- data.frame(age = initGens) %>% 
-#   group_by(age) %>% 
-#   summarise(n = n())
-# i <- 1
-# for (i in 1:256){
-#   cat("\014", i)
-#   generateN8 <- generateN6 <- dd %>% filter(age == "0") %>% .$n
-#   
-#   if(any(dd$age == 0)){
-#     frame8 <- data.frame(age = 8, n = generateN8)
-#     frame6 <- data.frame(age = 6, n = generateN8)
-#   } else {
-#     frame8 <- data.frame(age = 8, n = 0)
-#     frame6 <- data.frame(age = 6, n = 0)
-#   }
-#   #dd <- dd
-#   
-#  dd <- dd %>% 
-#     mutate(age = age-1) %>% 
-#     rbind(frame8) %>% 
-#     rbind(frame6) %>% 
-#     filter(age >= 0 & n > 0) %>% 
-#     group_by(age) %>% 
-#     summarise(n = sum(n)) %>% 
-#     arrange(age)
-#   
-#   
-# }
-# dd
-# sum(dd$n)
-# options(scipen = 99999)
-# 
-# sort(c(5,6,5,3,4,5,6,7,7,8))
-# sort(c(4,5,4,2,3,4,5,6,6,7))
