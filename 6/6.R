@@ -17,7 +17,7 @@ fishPopulationRecursive <- function(populationCount, generations){
   } else {
     generations = generations-1
     
-    return(fishPopulation(populationCount, generations))  
+    return(fishPopulationRecursive(populationCount, generations))  
   }
   
 }
@@ -32,9 +32,9 @@ mainRecursive <- function(){
   print(paste("fisk etter 256 gen: ", fishPopulationRecursive(popframe, generations = 256)))
   
 }
-start <- Sys.time()
+
 mainRecursive()
-Sys.time() - start
+
 
 
 #Standard solution
@@ -71,6 +71,6 @@ main <- function(){
   
   
 }
-start <- Sys.time()
+
 main()
-Sys.time() - start
+
