@@ -4,7 +4,7 @@ def crabMissile(file, costly):
     def crabEQ(startpos, newpos, costly):
         changepos = abs(startpos - newpos)
         if costly:
-            return round(changepos*(1+changepos)/2)
+            return changepos*(1+changepos)/2
         else:
             return changepos
         
@@ -31,7 +31,7 @@ def crabMissile(file, costly):
         fuelCounter = 0
 
 
-    return currentLowest
+    return round(currentLowest)
 
 
 print("Cheap moves: ",crabMissile("7.txt", costly = False))
