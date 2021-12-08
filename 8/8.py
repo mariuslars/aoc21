@@ -8,10 +8,11 @@ def fixSignal(file):
         outputSignals.append(signal.split("|")[1].strip().split(" "))
         inputSignals.append(signal.split("|")[0].strip().split(" "))
     
-    TESTVAR = 0
+    TESTVAR = 3
     uniqueCounter = 0
     updatedOutput = []
     displayDict = {}
+    scoreCounter = 0
     for output in [inputSignals[TESTVAR]]:
         for number in output:
             
@@ -45,7 +46,7 @@ def fixSignal(file):
             
             if (syv <= sortedNumber) and (len(sortedNumber) == 5):
                 tre = sortedNumber
-                print("3: ", number)
+                
                 displayDict["".join(sorted(number))] = 3
             else:
                 updatedOutput2.append(number)
@@ -71,34 +72,41 @@ def fixSignal(file):
                 displayDict["".join(sorted(number))] = 5
             else:
                 updatedOutput4.append(number)
-        print(fire)
-        print(sorted(fire))
-        
-        #TODO: DENNE MÅ FIKSES
-        print(updatedOutput4)
+
         updatedOutput5 = []
         for number in updatedOutput4:
             sortedNumber = set(sorted(number))
-            if len(fire.intersection(updatedOutput4[2]))+2 == 6:
+           
+            if len(fire.intersection(number))+2 == 6:
                 
                 ni = sorted(number)
                 
                 displayDict["".join(sorted(number))] = 9
             else:
-                updatedOutput5.append(number)
-        
+                updatedOutput5.append("".join(sorted(number)))
 
+    seks = set.union(set(fem),atte.difference(set(ni)))
+   
+    
+    displayDict["".join(sorted(seks))] = 6
+
+    updatedOutput5.remove("".join(sorted(seks)))
+
+    zero = updatedOutput5[0]
+    displayDict[zero] = 0
+    
     finalNumber = []
-    print(displayDict)
+
     for number in outputSignals[TESTVAR]:
-        print("LOL: ", number)
+        
         sortnum = "".join(sorted(number))
         try:
-            finalNumber.append(displayDict[sortnum])
+            finalNumber.append(str(displayDict[sortnum]))
         except:
             continue
-    return finalNumber
+    scoreCounter += int("".join(finalNumber))
 
+    return scoreCounter
 print(fixSignal("8_ex.txt"))
 
 " a\
@@ -114,7 +122,7 @@ e   f\
 
 #6 Etter identifisering av 5, 8, 9: set.union(fem,atte.difference(ni))
 
-#9 = innholdet i 4 + 2 bokstaver til #ETTER IDENTIFISERING AV 9
+
 
 
 #1 direkte identifisert
@@ -124,6 +132,7 @@ e   f\
 #5 Etter identifisering av 2 og 3: 8 difference av 5 == 2, 8.difference(2)
 #7 direkte identifisert
 #8 direkte identifisert
+#9 = innholdet i 4 + 2 bokstaver til #ETTER IDENTIFISERING AV 9
 
 
 #if e + innhold i 4 = 
