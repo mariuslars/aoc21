@@ -3,8 +3,7 @@ class Subsystemerror:
     def __init__(self):
 
         self.navSubsystem = []
-        self.matchingDict = {"{": "}", "[": "]", "(": ")", "<": ">",
-                             "}": "{", "]": "[", ")": "(", ">": "<"}
+        self.matchingDict = {"{": "}", "[": "]", "(": ")", "<": ">"}
         self.pairList = ["[]", "()", "{}", "<>"]
         self.leftList = ["[", "(", "{", "<"]
         self.rightList = ["]", ")", "}", ">"]
